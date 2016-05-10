@@ -5,8 +5,6 @@ describe 'Transmogrifier Convert Old', ->
   beforeEach ->
     @jsonServer = shmock 0xd00d
 
-    @sut = new Transmogrifier
-
   afterEach (done) ->
     @jsonServer.close done
 
@@ -17,7 +15,8 @@ describe 'Transmogrifier Convert Old', ->
           beforeEach (done) ->
             device = {}
 
-            @sut.convert { device, schemaType: 'options' }, (error, @response) =>
+            @sut = new Transmogrifier { device, schemaType: 'options' }
+            @sut.convert (error, @response) =>
               done(error)
 
           it 'should have an empty response', ->
@@ -32,7 +31,10 @@ describe 'Transmogrifier Convert Old', ->
                   something:
                     type: 'string'
 
-            @sut.convert { device, schemaType: 'options' }, (error, @response) =>
+            @sut = new Transmogrifier { device, schemaType: 'options' }
+
+            @sut = new Transmogrifier { device, schemaType: 'options' }
+            @sut.convert (error, @response) =>
               done(error)
 
           it 'should have a schema', ->
@@ -63,7 +65,8 @@ describe 'Transmogrifier Convert Old', ->
                 formSomething:
                   type: 'string'
 
-          @sut.convert { device, schemaType: 'options' }, (error, @response) =>
+          @sut = new Transmogrifier { device, schemaType: 'options' }
+          @sut.convert (error, @response) =>
             done(error)
 
         it 'should have a schema', ->
@@ -110,7 +113,8 @@ describe 'Transmogrifier Convert Old', ->
             optionsSchemaUrl: "http://localhost:#{0xd00d}/message-schema"
             optionsFormSchemaUrl: "http://localhost:#{0xd00d}/message-form-schema"
 
-          @sut.convert { device, schemaType: 'options' }, (error, @response) =>
+          @sut = new Transmogrifier { device, schemaType: 'options' }
+          @sut.convert (error, @response) =>
             done(error)
 
         it 'should get message schema', ->
@@ -147,7 +151,8 @@ describe 'Transmogrifier Convert Old', ->
           beforeEach (done) ->
             device = {}
 
-            @sut.convert { device, schemaType: 'message' }, (error, @response) =>
+            @sut = new Transmogrifier { device, schemaType: 'message' }
+            @sut.convert (error, @response) =>
               done(error)
 
           it 'should have an empty response', ->
@@ -162,7 +167,8 @@ describe 'Transmogrifier Convert Old', ->
                   something:
                     type: 'string'
 
-            @sut.convert { device, schemaType: 'message' }, (error, @response) =>
+            @sut = new Transmogrifier { device, schemaType: 'message' }
+            @sut.convert (error, @response) =>
               done(error)
 
           it 'should have a schema', ->
@@ -193,7 +199,8 @@ describe 'Transmogrifier Convert Old', ->
                 formSomething:
                   type: 'string'
 
-          @sut.convert { device, schemaType: 'message' }, (error, @response) =>
+          @sut = new Transmogrifier { device, schemaType: 'message' }
+          @sut.convert (error, @response) =>
             done(error)
 
         it 'should have a schema', ->
@@ -240,7 +247,8 @@ describe 'Transmogrifier Convert Old', ->
             messageSchemaUrl: "http://localhost:#{0xd00d}/message-schema"
             messageFormSchemaUrl: "http://localhost:#{0xd00d}/message-form-schema"
 
-          @sut.convert { device, schemaType: 'message' }, (error, @response) =>
+          @sut = new Transmogrifier { device, schemaType: 'message' }
+          @sut.convert (error, @response) =>
             done(error)
 
         it 'should get message schema', ->

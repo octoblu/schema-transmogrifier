@@ -1,0 +1,53 @@
+{
+  "schemas": {
+    "version": "1.0.0",
+    "messages": [
+      {
+        "title": "YoAge",
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "title": "YoDeets",
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer",
+            "title": "Age"
+          },
+          "bio": {
+            "type": "string",
+            "title": "Bio"
+          }
+        }
+      }
+    ],
+   "configure": {
+      "type": "object",
+      "properties": {
+        "command" : {
+          "type" : "object",
+          "properties" : {
+            "action" : {
+              "type" : "string",
+              "enum" : ["vibrate", "requestBlueToothStrength", "zeroOrientation"],
+              "default" : "vibrate"
+            },
+            "vibrationLength" : {
+              "type" : "string",
+              "enum" : ["short", "medium", "long"],
+              "default" : "short"
+            }
+          }
+        }
+      }
+    }
+  }
+}
