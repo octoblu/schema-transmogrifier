@@ -11,9 +11,27 @@ before_script:
 - npm install -g codeclimate-test-reporter
 after_script:
 - codeclimate-test-reporter < coverage/lcov.info
+before_deploy:
+- npm run-script bundle
+- mkdir -p deploy/schema-transmogrifier/$TRAVIS_TAG
+- cp deploy/schema-transmogrifier/latest/schema-transmogrifier.bundle.js deploy/schema-transmogrifier/$TRAVIS_TAG/schema-transmogrifier.bundle.js
 deploy:
-  provider: npm
+- provider: s3
+  access_key_id: AKIAJH2D5IPIRHYJT5IA
+  secret_access_key:
+    secure: "woiCUB16zDpheyM8Qws4i6soaZEB78X1vw7edn3b+DcyyjEIqtRquJCG8VUxXk9y9LCESLr6YBeAF+lgwpf+y5FoCx5lGtOLOrcOaboQHwezHtPKM8xPR+/O/mmgzK7JNya0WDzEH9zXqU20CMx0heLtnDsKoQe93BTbirUNCij6+1LiFvl1FmtmWEj29n3XmHEnBrW63fGvJ8NWjUqxO04Py0/jSGdV0mYJqldfyUIgqmilXw+vE4Bb1nTm/TVlsuu+mFvYRizJbSw7B+e1UB23hofI8ZqtezSRkjxLCZbgAqGePLmNd7gMvRHj5Ce3335MVom52jSWLRM/ryVPXsd+DQ45Q1dhia9hFPmcqbb5VRIJFipnOeKXRP6eM1Ila18E2vyU70R/BgtnzhJlxtqmSmoP+PjX3Rl9a/jL9DQw7/QP0Qxt6g7rar8+3OdSOqbg3ziGZZKrXoHqdxh8O2SmbuY6Zx3ht4w4L/ulLfEcUl97pXESJxzU31DuLyCoJNjm1T57o4GdzDJkrMCWwf/fUVHZtnFPh+3O+cP7yvd4F+AvYZ4y8D7ewU/K1Aw34JXKvH2U0bpmg8L1ZNvzlT2vKDwKhEZbVg+DsUuV5goTg5DpQ3FZ+KA9cQsueMcaWJx/rK+cZfw00z4CBOByk1SmiMRMLj5PMJK231LYV88="
+  bucket: octoblu-cdn
+  region: us-west-2
+  skip_cleanup: true
+  detect_encoding: true
+  local-dir: deploy
+  upload-dir: js
+  on:
+    tags: true
+    all_branches: true
+- provider: npm
   email: serveradmin@octoblu.com
+  skip_cleanup: true
   api_key:
     secure: jcdh2ch2LwkGJSu9xnlf48KF6xMamdVcYtrHVQ47gRYjnepNmwsXVst98+BuihxUQDaLSDqa+ugFtxUs4S7iDkTrDngODqYE7Hcad57W6H3h48g0AaucxiZ8xFI9SUbhsWkWqmqwsDbTW59CdlZYONzp0kIulN9mywgWB8Q+3NyQSgnsZdhsYMwe+PLBj+L8lYim7LbJNJ/QpsUJVAMrCOvgPUWt3POBE8jffpW5ttSNvfvEAmETcuL56nFHFKVzlAVkC9u0/TaATCewYMs3Ta2AsjZMf6jAByVy1gdvQbFG2T0gt8TgaGuhe3xFYSplWIuXyE9Nw/JqCYDqQOUlFIeP3w9LrNfQvHuXEzmIZeirmM5BkI4eQ9vzqH8h+Ycvb+yvnvcaV0zbC6/OlIHvgQ1WzPvFXacUJKDK6xmp16y0GwtzG4DvnPd6K0rMIcMAfAwO7Pffe2frk2WxT8aKTFyT1KAhcxBjAFrWhlmMm/8bEY1BWqr/I9ZCN9MV0fu/HXbbsmouhzjPVj8EfbikxOIJRmsCbQ+yqDVXRAhbNJlmmuzsL80Ao5nsFfeEINWY9Ylz8O6CgrcbxwOVTyWigZG2FdyM3tQRm83m7DjKvMG6QCSmO5fgeQTZvE5S+/xA1a/S9sHNBdlUSh2BH4qWI7qJqM/8VL9ImF7KfMbaI8U=
   on:
