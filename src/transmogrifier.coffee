@@ -1,6 +1,6 @@
 request   = require 'superagent'
 async     = require 'async'
-deref     = require 'json-schema-deref'
+RefParser = require 'json-schema-ref-parser'
 OldSchema = require './old-schema.coffee'
 V1Schema  = require './v1-schema.coffee'
 V2Schema  = require './v2-schema.coffee'
@@ -28,7 +28,7 @@ class Transmogrifier
   deref: (schema, callback) =>
     return callback() unless schema?
     delete schema.url unless schema.url?
-    deref(schema, callback)
+    RefParser.dereference(schema, callback)
 
   getRawSchemas: (callback) =>
     return @oldSchema.getSchemas(callback) if @oldSchema.is()
