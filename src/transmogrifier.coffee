@@ -1,9 +1,9 @@
 request   = require 'superagent'
 async     = require 'async'
 deref     = require 'json-schema-deref'
-OldSchema = require './old-schema'
-V1Schema  = require './v1-schema'
-V2Schema  = require './v2-schema'
+OldSchema = require './old-schema.coffee'
+V1Schema  = require './v1-schema.coffee'
+V2Schema  = require './v2-schema.coffee'
 
 class Transmogrifier
   constructor: ({ device, schemaType }) ->
