@@ -14,7 +14,7 @@ after_script:
 before_deploy:
 - npm run-script bundle
 - mkdir -p deploy/schema-transmogrifier/$TRAVIS_TAG
-- cp deploy/schema-transmogrifier/latest/schema-transmogrifier.bundle.js deploy/schema-transmogrifier/$TRAVIS_TAG/schema-transmogrifier.bundle.js
+- cp deploy/schema-transmogrifier/latest/* deploy/schema-transmogrifier/$TRAVIS_TAG
 deploy:
 - provider: s3
   access_key_id: AKIAJH2D5IPIRHYJT5IA

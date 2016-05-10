@@ -1,6 +1,6 @@
 {
   "name": "schema-transmogrifier",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Schema transmogrifier",
   "main": "index.js",
   "scripts": {
