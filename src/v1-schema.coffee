@@ -1,4 +1,3 @@
-request = require 'superagent'
 async   = require 'async'
 _       = require 'lodash'
 

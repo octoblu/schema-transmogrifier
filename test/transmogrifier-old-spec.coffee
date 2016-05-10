@@ -15,7 +15,7 @@ describe 'Transmogrifier Convert Old', ->
           beforeEach (done) ->
             device = {}
 
-            @sut = new Transmogrifier { device, schemaType: 'options' }
+            @sut = new Transmogrifier { device, schemaType: 'configure' }
             @sut.convert (error, @response) =>
               done(error)
 
@@ -31,9 +31,9 @@ describe 'Transmogrifier Convert Old', ->
                   something:
                     type: 'string'
 
-            @sut = new Transmogrifier { device, schemaType: 'options' }
+            @sut = new Transmogrifier { device, schemaType: 'configure' }
 
-            @sut = new Transmogrifier { device, schemaType: 'options' }
+            @sut = new Transmogrifier { device, schemaType: 'configure' }
             @sut.convert (error, @response) =>
               done(error)
 
@@ -65,7 +65,7 @@ describe 'Transmogrifier Convert Old', ->
                 formSomething:
                   type: 'string'
 
-          @sut = new Transmogrifier { device, schemaType: 'options' }
+          @sut = new Transmogrifier { device, schemaType: 'configure' }
           @sut.convert (error, @response) =>
             done(error)
 
@@ -113,7 +113,7 @@ describe 'Transmogrifier Convert Old', ->
             optionsSchemaUrl: "http://localhost:#{0xd00d}/message-schema"
             optionsFormSchemaUrl: "http://localhost:#{0xd00d}/message-form-schema"
 
-          @sut = new Transmogrifier { device, schemaType: 'options' }
+          @sut = new Transmogrifier { device, schemaType: 'configure' }
           @sut.convert (error, @response) =>
             done(error)
 
