@@ -30,7 +30,7 @@ class OldSchema
     return @getSchemaFromUrl(url, callback) if url?
     return callback(null, _.get(@device, prop))
 
-  convertToCurrent: ({ schema, schemaType }) =>
+  convertToCurrent: ({ schema }) =>
     wrap =
       type: 'object'
       properties: {}
