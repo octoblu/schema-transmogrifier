@@ -20,11 +20,8 @@ describe 'Transmogrifier Convert Old', ->
             @sut.convert { device, schemaType: 'options' }, (error, @response) =>
               done(error)
 
-          it 'should have a schema', ->
-            expect(@response.schema).to.be.empty
-
-          it 'should not have a form schema', ->
-            expect(@response.form).to.be.empty
+          it 'should have an empty response', ->
+            expect(@response).to.be.empty
 
         describe 'when it has a schema but no form schema', ->
           beforeEach (done) ->
@@ -153,11 +150,8 @@ describe 'Transmogrifier Convert Old', ->
             @sut.convert { device, schemaType: 'message' }, (error, @response) =>
               done(error)
 
-          it 'should have a schema', ->
-            expect(@response.schema).to.be.empty
-
-          it 'should not have a form schema', ->
-            expect(@response.form).to.be.empty
+          it 'should have an empty response', ->
+            expect(@response).to.be.empty
 
         describe 'when it has a schema but no form schema', ->
           beforeEach (done) ->

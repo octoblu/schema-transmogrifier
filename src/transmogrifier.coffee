@@ -1,16 +1,30 @@
 request = require 'superagent'
 async   = require 'async'
+deref   = require 'json-schema-deref'
 _       = require 'lodash'
 
 class Transmogrifier
   convert: ({ device, schemaType }, callback) =>
+    @_getRawSchema { device, schemaType }, (error, response) =>
+      return callback error if error?
+      return callback null unless response?
+      async.parallel {
+        schema: async.apply(@_deref, response.schema)
+        form: async.apply(@_deref, response.form)
+      }, callback
+
+  _deref: (schema, callback) =>
+    return callback() unless schema?
+    deref(schema, callback)
+    
+  _getRawSchema: ({ device, schemaType }, callback) =>
     if @_isOld { device, schemaType }
       return @_getOldSchemas { device, schemaType }, callback
 
     if @_isNew { device, schemaType }
       return @_getNewSchemas { device, schemaType  }, callback
 
-    callback null, { }
+    callback null
 
   _getOldSchemaType: ({ schemaType }) =>
     if schemaType == 'configure'
